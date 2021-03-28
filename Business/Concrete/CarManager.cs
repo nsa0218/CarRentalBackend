@@ -5,6 +5,7 @@ using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,12 @@ namespace Business.Concrete
         {
             var result = _carDal.GetAll().SingleOrDefault(c => c.Id == id);
             return new SuccessDataResult<Car>(result);
+        }
+
+        public IDataResult<List<CarDetailsDto>> GetCarDetails()
+        {
+           var result = _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailsDto>>(result);
         }
 
         public IResult Update(Car car)
